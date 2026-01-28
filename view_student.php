@@ -2,7 +2,7 @@
 include "db.php";
 
 // Fetch students ordered by ID (low → high)
-$result = mysqli_query($conn, "SELECT * FROM students ORDER BY student_id asc");
+$result = mysqli_query($conn, "SELECT * FROM students INNER JOIN classes ON students.class_id = classes.id; ");
 ?>
 
 <!DOCTYPE html>
@@ -80,8 +80,9 @@ $result = mysqli_query($conn, "SELECT * FROM students ORDER BY student_id asc");
         <th>Age</th>
         <th>Gender</th>
         <th>Date</th>
-        <th>Edit</th>
-        <th>Delete</th>
+        <th>classes</th>
+        <th>edit</th>
+        <th>delete</th>
     </tr>
 
     <?php
@@ -94,6 +95,7 @@ $result = mysqli_query($conn, "SELECT * FROM students ORDER BY student_id asc");
                 <td>{$row['age']}</td>
                 <td>{$row['gender']}</td>
                 <td>{$row['enrollment_date']}</td>
+                <td>{$row['class_name']}</td>
                 <td><a href='edit_student.php?id={$row['student_id']}'>Edit</a></td>
                 <td><a href='delete_student.php?id={$row['student_id']}' onclick=\"return confirm('Are you sure?')\">Delete</a></td>
               </tr>";

@@ -14,10 +14,40 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
             z-index: 9999;
             color: white;
-            font-size: 24px;
-            font-weight: bold;
+            font-family: Arial, sans-serif;
+        }
+
+        .spinner {
+            border: 6px solid #f3f3f3;
+            border-top: 6px solid #ffffff;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg);}
+            100% { transform: rotate(360deg);}
+        }
+
+        .progress-container {
+            width: 200px;
+            height: 10px;
+            background-color: #ffffff50;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background-color: #ffffff;
+            transition: width 0.2s;
         }
 
         /* Hide content initially */
@@ -101,7 +131,13 @@
 <body>
 
 <!-- Preloader -->
-<div id="preloader">Loading...</div>
+<div id="preloader">
+    <div class="spinner"></div>
+    <div class="progress-container">
+        <div class="progress-bar" id="progress-bar"></div>
+    </div>
+    <p id="progress-text">0%</p>
+</div>
 
 <!-- Actual content -->
 <div id="content" class="form-container">
@@ -132,11 +168,22 @@ if (isset($_GET['msg'])) {
 </div>
 
 <script>
-    // Show preloader for 5 seconds, then show content
-    setTimeout(function() {
-        document.getElementById('preloader').style.display = 'none';
-        document.getElementById('content').style.display = 'block';
-    }, 5000); // 5000 milliseconds = 5 seconds
+    let progress = 0;
+    const progressBar = document.getElementById('progress-bar');
+    const progressText = document.getElementById('progress-text');
+
+    // Update progress every 50ms
+    const interval = setInterval(() => {
+        if(progress >= 100){
+            clearInterval(interval);
+            document.getElementById('preloader').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
+        } else {
+            progress++;
+            progressBar.style.width = progress + '%';
+            progressText.textContent = progress + '%';
+        }
+    }, 50); // 50ms × 100 = ~5 seconds
 </script>
 
 </body>

@@ -20,7 +20,7 @@ mysqli_query($conn, "UPDATE students SET
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f2f5;
+            background-color: #208446;
             display: flex;
             justify-content: center;
             align-items: center;

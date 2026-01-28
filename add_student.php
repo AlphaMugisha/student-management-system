@@ -3,6 +3,29 @@
 <head>
     <title>Add Student</title>
     <style>
+        /* Preloader styles */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #243b55;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Hide content initially */
+        #content {
+            display: none;
+        }
+
+        /* Your form styles */
         body {
             font-family: Arial, sans-serif;
             background-color: #243b55;
@@ -71,18 +94,17 @@
             margin-bottom: 10px;
         }
 
-        .message.success {
-            color: green;
-        }
-
-        .message.error {
-            color: red;
-        }
+        .message.success { color: green; }
+        .message.error { color: red; }
     </style>
 </head>
 <body>
 
-<div class="form-container">
+<!-- Preloader -->
+<div id="preloader">Loading...</div>
+
+<!-- Actual content -->
+<div id="content" class="form-container">
 
 <?php
 if (isset($_GET['msg'])) {
@@ -103,12 +125,19 @@ if (isset($_GET['msg'])) {
     <input type="number" name="age" placeholder="Age" required>
     <input type="text" name="gender" placeholder="Gender" required>
     <input type="date" name="date" required>
-    <input type="number" name="phone" placeholder="Phone" required >
     <input type="submit" value="Add Student">
 </form>
 
 <a href="index.php">Back Home</a>
-
 </div>
+
+<script>
+    // Show preloader for 5 seconds, then show content
+    setTimeout(function() {
+        document.getElementById('preloader').style.display = 'none';
+        document.getElementById('content').style.display = 'block';
+    }, 5000); // 5000 milliseconds = 5 seconds
+</script>
+
 </body>
 </html>

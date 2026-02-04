@@ -99,6 +99,9 @@ $result = mysqli_query($conn, "SELECT * FROM students INNER JOIN classes ON stud
                 <td><a href='edit_student.php?id={$row['student_id']}'>Edit</a></td>
                 <td><a href='delete_student.php?id={$row['student_id']}' onclick=\"return confirm('Are you sure?')\">Delete</a></td>
               </tr>";
+              echo "<!-- Debug: Row data - ";
+              print_r($row);
+              echo " -->";
         $no++;
     }
     ?>

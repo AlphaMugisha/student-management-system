@@ -2,7 +2,7 @@
 include "db.php";
 
 // Fetch students ordered by ID (low → high)
-$result = mysqli_query($conn, "SELECT Distinct name,age,gender,enrollment_date,class_id,student_id FROM students  ");
+$result = mysqli_query($conn, "SELECT name,class_name FROM students  left join classes ");
 ?>
 
 <!DOCTYPE html>
@@ -81,8 +81,6 @@ $result = mysqli_query($conn, "SELECT Distinct name,age,gender,enrollment_date,c
         <th>Gender</th>
         <th>Date</th>
         <th>classes</th>
-        <th>edit</th>
-        <th>delete</th>
     </tr>
 
     <?php

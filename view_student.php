@@ -2,7 +2,7 @@
 include "db.php";
 
 // Fetch students ordered by ID (low → high)
-$result = mysqli_query($conn, "SELECT * FROM students join classes ");
+$result = mysqli_query($conn, "SELECT * FROM students join classes where students.class_id=classes.id ORDER BY student_id ASC");
 ?>
 
 <!DOCTYPE html>

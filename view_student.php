@@ -2,7 +2,7 @@
 include "db.php";
 
 // Fetch students ordered by ID (low → high)
-$result = mysqli_query($conn, "SELECT Distinct name FROM students  ");
+$result = mysqli_query($conn, "SELECT Distinct name,age,gender,enrollment_date,class_id,student_id FROM students  ");
 ?>
 
 <!DOCTYPE html>
@@ -95,9 +95,7 @@ $result = mysqli_query($conn, "SELECT Distinct name FROM students  ");
                 <td>{$row['age']}</td>
                 <td>{$row['gender']}</td>
                 <td>{$row['enrollment_date']}</td>
-                <td>{$row['class_name']}</td>
-                <td><a href='edit_student.php?id={$row['student_id']}'>Edit</a></td>
-                <td><a href='delete_student.php?id={$row['student_id']}' onclick=\"return confirm('Are you sure?')\">Delete</a></td>
+                <td>{$row['class_id']}</td>
               </tr>";
               echo "<!-- Debug: Row data - ";
               print_r($row);

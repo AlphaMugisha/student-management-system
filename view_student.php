@@ -2,7 +2,7 @@
 include "db.php";
 
 // Fetch students ordered by ID (low → high)
-$result = mysqli_query($conn, "SELECT * FROM students join classes where students.class_id=classes.id ORDER BY student_id ASC");
+$result = mysqli_query($conn, "SELECT id FROM student_2024 union all SELECT id FROM student_2026 order by id ASC;");
 ?>
 
 <!DOCTYPE html>
@@ -75,25 +75,15 @@ $result = mysqli_query($conn, "SELECT * FROM students join classes where student
 <table>
     <tr>
         <th>ID</th>
-        <th>No</th>
-        <th>Name</th>
-        <th>Age</th>
-        <th>Gender</th>
-        <th>Date</th>
-        <th>classes</th>
     </tr>
 
     <?php
     $no = 1;
     while ($row = mysqli_fetch_assoc($result)) {
         echo "<tr>
-                <td>{$row['student_id']}</td>
-                <td>$no</td>
-                <td>{$row['name']}</td>
-                <td>{$row['age']}</td>
-                <td>{$row['gender']}</td>
-                <td>{$row['enrollment_date']}</td>
-                <td>{$row['class_id']}</td>
+            
+                
+                <td>{$row['id']}</td>
               </tr>";
               echo "<!-- Debug: Row data - ";
               print_r($row);

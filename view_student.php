@@ -2,7 +2,7 @@
 include "db.php";
 
 // Fetch students ordered by ID (low → high)
-$result = mysqli_query($conn, "SELECT * FROM students INNER JOIN classes ON students.class_id = classes.id; ");
+$result = mysqli_query($conn, "SELECT Distinct name FROM students  ");
 ?>
 
 <!DOCTYPE html>

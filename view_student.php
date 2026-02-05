@@ -2,7 +2,7 @@
 include "db.php";
 
 // Fetch students ordered by ID (low → high)
-$result = mysqli_query($conn, "SELECT id FROM student_2024 union all SELECT id FROM student_2026 order by id ASC;");
+$result = mysqli_query($conn, "SELECT * from students");
 ?>
 
 <!DOCTYPE html>
@@ -75,6 +75,8 @@ $result = mysqli_query($conn, "SELECT id FROM student_2024 union all SELECT id F
 <table>
     <tr>
         <th>ID</th>
+        <th>No</th>
+        <th>Names</th>
     </tr>
 
     <?php
@@ -82,12 +84,9 @@ $result = mysqli_query($conn, "SELECT id FROM student_2024 union all SELECT id F
     while ($row = mysqli_fetch_assoc($result)) {
         echo "<tr>
             
-                
+                <td>
                 <td>{$row['id']}</td>
               </tr>";
-              echo "<!-- Debug: Row data - ";
-              print_r($row);
-              echo " -->";
         $no++;
     }
     ?>

@@ -84,19 +84,18 @@ $result = mysqli_query($conn, "SELECT * from students");
         <th>Delete</th>
     </tr>
 
-    <?php
+<?php
     $no = 1;
     while ($row = mysqli_fetch_assoc($result)) {
         echo "<tr>
-            
-                <td>
                 <td>{$row['student_id']}</td>
+                <td>{$no}</td>
                 <td>{$row['name']}</td>
                 <td>{$row['age']}</td>
                 <td>{$row['gender']}</td>
                 <td>{$row['enrollment_date']}</td>
-                <td><a href='edit_student.php?id={$row['id']}'>Edit</a></td>
-                <td><a href='delete_student.php?id={$row['id']}'>Delete</a></td>
+                <td><a href='edit_student.php?id={$row['student_id']}'>Edit</a></td>
+                <td><a href='delete_student.php?id={$row['student_id']}'>Delete</a></td>
               </tr>";
         $no++;
     }

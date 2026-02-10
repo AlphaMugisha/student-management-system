@@ -93,6 +93,10 @@ $result = mysqli_query($conn, "SELECT * from students");
                 <td>{$row['id']}</td>
                 <td>{$row['names']}</td>
                 <td>{$row['age']}</td>
+                <td>{$row['gender']}</td>
+                <td>{$row['enrollment_date']}</td>
+                <td><a href='edit_student.php?id={$row['id']}'>Edit</a></td>
+                <td><a href='delete_student.php?id={$row['id']}'>Delete</a></td>
               </tr>";
         $no++;
     }

@@ -91,7 +91,7 @@ $result = mysqli_query($conn, "SELECT * from students");
             
                 <td>
                 <td>{$row['student_id']}</td>
-                <td>{$row['names']}</td>
+                <td>{$row['name']}</td>
                 <td>{$row['age']}</td>
                 <td>{$row['gender']}</td>
                 <td>{$row['enrollment_date']}</td>

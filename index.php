@@ -5,7 +5,7 @@
     <style>
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #141e30, #243b55);
             min-height: 100vh;
             display: flex;
@@ -17,7 +17,7 @@
             max-width: 900px;
             width: 90%;
             background: white;
-            padding: 50px;
+            padding: 100px;
             border-radius: 14px;
             box-shadow: 0 15px 40px rgba(0,0,0,0.25);
             text-align: center;

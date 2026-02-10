@@ -92,6 +92,7 @@ $result = mysqli_query($conn, "SELECT * from students");
                 <td>
                 <td>{$row['id']}</td>
                 <td>{$row['names']}</td>
+                <td>{$row['age']}</td>
               </tr>";
         $no++;
     }

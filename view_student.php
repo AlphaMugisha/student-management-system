@@ -90,7 +90,7 @@ $result = mysqli_query($conn, "SELECT * from students");
         echo "<tr>
             
                 <td>
-                <td>{$row['id']}</td>
+                <td>{$row['student_id']}</td>
                 <td>{$row['names']}</td>
                 <td>{$row['age']}</td>
                 <td>{$row['gender']}</td>

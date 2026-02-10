@@ -2,7 +2,7 @@
 include "db.php";
 
 // Fetch students ordered by ID (low → high)
-$result = mysqli_query($conn, "SELECT * from students");
+$result = mysqli_query($conn, "SELECT * FROM students ORDER BY id ASC");
 ?>
 
 <!DOCTYPE html>
@@ -74,8 +74,8 @@ $result = mysqli_query($conn, "SELECT * from students");
 
 <table>
     <tr>
-        <th>ID</th>
         <th>No</th>
+        <th>ID</th>
         <th>Names</th>
         <th>Age</th>
         <th>Gender</th>
@@ -87,17 +87,22 @@ $result = mysqli_query($conn, "SELECT * from students");
     <?php
     $no = 1;
     while ($row = mysqli_fetch_assoc($result)) {
-        echo "<tr>
-            
-                <td>
-                <td>{$row['student_id']}</td>
-                <td>{$row['name']}</td>
-                <td>{$row['age']}</td>
-                <td>{$row['gender']}</td>
-                <td>{$row['enrollment_date']}</td>
-                <td><a href='edit_student.php?id={$row['id']}'>Edit</a></td>
-                <td><a href='delete_student.php?id={$row['id']}'>Delete</a></td>
-              </tr>";
+    ?>
+        <tr>
+            <td><?php echo $no; ?></td>
+            <td><?php echo $row['id']; ?></td>
+            <td><?php echo $row['names']; ?></td>
+            <td><?php echo $row['age']; ?></td>
+            <td><?php echo $row['gender']; ?></td>
+            <td><?php echo $row['enrollment_date']; ?></td>
+            <td>
+                <a href="edit_student.php?id=<?php echo $row['id']; ?>">Edit</a>
+            </td>
+            <td>
+                <a href="delete_student.php?id=<?php echo $row['id']; ?>">Delete</a>
+            </td>
+        </tr>
+    <?php
         $no++;
     }
     ?>

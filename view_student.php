@@ -103,6 +103,7 @@ $result = mysqli_query($conn, "SELECT * from students");
 </table>
 
 <a href="index.php" class="back-home">Back Home</a>
+<a href="admin_status.php" class="back-home">See Visitors</a>
 
 </body>
 </html>

@@ -2,7 +2,7 @@
 include "db.php";
 
 // Fetch students ordered by ID (low → high)
-$result = mysqli_query($conn, "SELECT * FROM students ORDER BY id ASC");
+$result = mysqli_query($conn, "SELECT * FROM students ORDER BY student_id ASC");
 ?>
 
 <!DOCTYPE html>

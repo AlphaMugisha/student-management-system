@@ -77,6 +77,8 @@ $result = mysqli_query($conn, "SELECT * from students");
         <th>ID</th>
         <th>No</th>
         <th>Names</th>
+        <th>Date</th>
+        <th>Action</th>
     </tr>
 
     <?php

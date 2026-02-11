@@ -99,6 +99,88 @@
         th { background: #334155; color: var(--neon-blue); padding: 15px; text-transform: uppercase; font-size: 12px; }
         td { padding: 15px; border-bottom: 1px solid #334155; text-align: center; }
         .btn { background: var(--neon-blue); color: #000; padding: 8px 16px; border-radius: 4px; font-weight: bold; text-decoration: none; font-size: 12px; }
+
+        .matrix-bg {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0,255,255,0.05) 0px,
+        rgba(0,255,255,0.05) 1px,
+        transparent 1px,
+        transparent 3px
+    );
+    animation: matrixMove 10s linear infinite;
+    z-index: 0;
+}
+
+@keyframes matrixMove {
+    from { background-position: 0 0; }
+    to { background-position: 0 100px; }
+}
+
+/* GLITCH TITLE */
+.glitch-title {
+    font-size: 22px;
+    color: var(--neon-blue);
+    position: relative;
+    letter-spacing: 3px;
+    margin-bottom: 25px;
+    text-shadow: 0 0 10px var(--neon-blue);
+    animation: flicker 2s infinite alternate;
+}
+
+.glitch-title::before,
+.glitch-title::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+}
+
+.glitch-title::before {
+    color: #ff00c8;
+    animation: glitchTop 1s infinite linear alternate-reverse;
+}
+
+.glitch-title::after {
+    color: #00ffea;
+    animation: glitchBottom 1s infinite linear alternate-reverse;
+}
+
+@keyframes glitchTop {
+    0% { clip-path: inset(0 0 80% 0); transform: translate(-2px,-2px); }
+    100% { clip-path: inset(0 0 60% 0); transform: translate(2px,2px); }
+}
+
+@keyframes glitchBottom {
+    0% { clip-path: inset(60% 0 0 0); transform: translate(2px,2px); }
+    100% { clip-path: inset(80% 0 0 0); transform: translate(-2px,-2px); }
+}
+
+/* ELECTRIC FLICKER */
+@keyframes flicker {
+    0%,18%,22%,25%,53%,57%,100% {
+        opacity: 1;
+    }
+    20%,24%,55% {
+        opacity: 0.4;
+    }
+}
+
+/* COOL EXIT ZOOM */
+.preloader-exit {
+    animation: zoomOut 0.6s ease forwards;
+}
+
+@keyframes zoomOut {
+    to {
+        transform: scale(1.2);
+        opacity: 0;
+        filter: blur(20px);
+    }
+}
     </style>
 </head>
 <body>

@@ -56,15 +56,6 @@
             box-shadow: 0 0 15px var(--neon-blue), inset 0 0 15px var(--neon-blue);
         }
 
-        .square-loader::before {
-            content: "";
-            position: absolute;
-            top: -10px; left: -10px;
-            width: 20px; height: 20px;
-            border-top: 4px solid #fff;
-            border-left: 4px solid #fff;
-        }
-
         @keyframes rotate {
             0% { transform: rotate(0deg); border-radius: 0%; }
             50% { transform: rotate(180deg); border-radius: 50%; }

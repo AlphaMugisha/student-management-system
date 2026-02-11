@@ -68,6 +68,13 @@ $result = mysqli_query($conn, "SELECT * from students order by student_id ASC");
     </style>
 </head>
 <body>
+    <div id="preloader">
+    <div class="spinner"></div>
+    <div class="progress-container">
+        <div class="progress-bar" id="progress-bar"></div>
+    </div>
+    <p id="progress-text">0%</p>
+</div>
 
 <h2>Student List</h2>
 

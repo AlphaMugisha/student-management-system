@@ -105,6 +105,13 @@
     </style>
 </head>
 <body>
+    <div id="preloader">
+    <div class="spinner"></div>
+    <div class="progress-container">
+        <div class="progress-bar" id="progress-bar"></div>
+    </div>
+    <p id="progress-text">0%</p>
+</div>
 
 <div class="box">
     <h1>Student Management System</h1>

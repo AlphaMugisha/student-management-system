@@ -9,6 +9,57 @@ $result = mysqli_query($conn, "SELECT * from students order by student_id ASC");
 <head>
     <title>Student List</title>
     <style>
+                #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #243b55;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 9999;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        .spinner {
+            border: 6px solid #f3f3f3;
+            border-top: 6px solid #ffffff;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg);}
+            100% { transform: rotate(360deg);}
+        }
+
+        .progress-container {
+            width: 200px;
+            height: 10px;
+            background-color: #ffffff50;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background-color: #ffffff;
+            transition: width 0.2s;
+        }
+
+        /* Hide content initially */
+        #content {
+            display: none;
+        }
+
         body {
             font-family: Arial, sans-serif;
             background-color: #e9cfcf;

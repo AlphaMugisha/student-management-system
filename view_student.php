@@ -162,5 +162,24 @@ $result = mysqli_query($conn, "SELECT * from students order by student_id ASC");
 <a href="index.php" class="back-home">Back Home</a>
 <a href="admin_status.php" class="back-home">See Visitors</a>
 
+<script>
+    let progress = 0;
+    const progressBar = document.getElementById('progress-bar');
+    const progressText = document.getElementById('progress-text');
+
+    // Update progress every 50ms
+    const interval = setInterval(() => {
+        if(progress >= 100){
+            clearInterval(interval);
+            document.getElementById('preloader').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
+        } else {
+            progress++;
+            progressBar.style.width = progress + '%';
+            progressText.textContent = progress + '%';
+        }
+    }, 50); // 50ms × 100 = ~5 seconds
+</script>
+
 </body>
 </html>

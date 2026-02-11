@@ -64,6 +64,24 @@
         <a href="view_student.php">View Students</a>
     </div>
 </div>
+<script>
+    let progress = 0;
+    const progressBar = document.getElementById('progress-bar');
+    const progressText = document.getElementById('progress-text');
+
+    // Update progress every 50ms
+    const interval = setInterval(() => {
+        if(progress >= 100){
+            clearInterval(interval);
+            document.getElementById('preloader').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
+        } else {
+            progress++;
+            progressBar.style.width = progress + '%';
+            progressText.textContent = progress + '%';
+        }
+    }, 50); // 50ms × 100 = ~5 seconds
+</script>
 
 </body>
 </html>

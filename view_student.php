@@ -1,160 +1,194 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Student List</title>
+    <title>Student Management System</title>
     <style>
-        /* COOL PRELOADER CSS */
+        :root {
+            --neon-blue: #00f2ff;
+            --dark-bg: #050a10;
+        }
+
         #preloader {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, #243b55 0%, #141e30 100%);
+            inset: 0;
+            background-color: var(--dark-bg);
             display: flex;
-            justify-content: center;
-            align-items: center;
             flex-direction: column;
-            z-index: 9999;
-            color: white;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            transition: opacity 0.8s ease; /* Smooth fade out */
-        }
-
-        /* Glowing Ring Loader */
-        .loader-ring {
-            position: relative;
-            width: 120px;
-            height: 120px;
-            display: flex;
             justify-content: center;
             align-items: center;
+            z-index: 10000;
+            overflow: hidden;
+            font-family: 'Courier New', Courier, monospace;
         }
 
-        .loader-ring span {
+        /* The Laser Scan Line */
+        #preloader::after {
+            content: "";
             position: absolute;
-            top: 0;
+            top: -100%;
             left: 0;
             width: 100%;
             height: 100%;
-            border: 2px solid #fff;
-            border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%;
-            transition: 0.5s;
-            animation: animate 6s linear infinite;
+            background: linear-gradient(to bottom, transparent, var(--neon-blue), transparent);
+            opacity: 0.1;
+            animation: scan 3s linear infinite;
         }
 
-        /* Multiple rings with different speeds */
-        .loader-ring span:nth-child(1) { animation-duration: 4s; }
-        .loader-ring span:nth-child(2) { animation-duration: 3s; border-color: #00d2ff; }
-        .loader-ring span:nth-child(3) { animation-duration: 2s; border-color: #3a7bd5; }
-
-        @keyframes animate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        @keyframes scan {
+            0% { top: -100%; }
+            100% { top: 100%; }
         }
 
-        .percentage {
-            font-size: 1.5rem;
-            font-weight: bold;
-            letter-spacing: 2px;
-            margin-top: 20px;
-            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+        .loader-container {
+            position: relative;
+            width: 250px;
+            text-align: center;
         }
 
-        .loading-text {
-            font-size: 0.8rem;
+        /* Digital Square Loader */
+        .square-loader {
+            width: 100px;
+            height: 100px;
+            border: 2px solid var(--neon-blue);
+            margin: 0 auto 30px;
+            position: relative;
+            animation: rotate 4s linear infinite;
+            box-shadow: 0 0 15px var(--neon-blue), inset 0 0 15px var(--neon-blue);
+        }
+
+        .square-loader::before {
+            content: "";
+            position: absolute;
+            top: -10px; left: -10px;
+            width: 20px; height: 20px;
+            border-top: 4px solid #fff;
+            border-left: 4px solid #fff;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); border-radius: 0%; }
+            50% { transform: rotate(180deg); border-radius: 50%; }
+            100% { transform: rotate(360deg); border-radius: 0%; }
+        }
+
+        .status-text {
+            color: var(--neon-blue);
             text-transform: uppercase;
-            letter-spacing: 4px;
-            opacity: 0.6;
-            margin-top: 10px;
+            letter-spacing: 5px;
+            font-size: 14px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 8px var(--neon-blue);
         }
 
-        /* CONTENT STYLING */
+        .percentage-num {
+            font-size: 48px;
+            font-weight: 900;
+            color: #fff;
+            margin: 0;
+            font-style: italic;
+        }
+
+        /* Content Transition */
         #content {
+            display: none;
             opacity: 0;
-            transform: translateY(20px);
-            transition: all 1s ease;
-            padding: 30px;
+            filter: blur(10px);
+            transition: all 1.2s ease-out;
         }
 
-        /* Existing Table/Body styles */
-        body { font-family: Arial, sans-serif; background-color: #f4f7f6; margin: 0; }
-        h2 { color: #243b55; text-align: center; }
-        table { width: 80%; margin: 20px auto; border-collapse: collapse; background: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        th, td { border: 1px solid #eee; padding: 12px; text-align: center; }
-        th { background-color: #243b55; color: white; }
-        .back-home { display: inline-block; padding: 10px 20px; background: #243b55; color: white; text-decoration: none; border-radius: 4px; margin: 10px; }
+        .content-visible {
+            display: block !important;
+            opacity: 1 !important;
+            filter: blur(0px) !important;
+        }
+
+        /* Table Styling Upgrades */
+        body { background: #0f172a; color: #f8fafc; margin: 0; padding: 40px; font-family: 'Inter', sans-serif; }
+        table { width: 90%; margin: auto; border-radius: 12px; overflow: hidden; border-collapse: collapse; background: #1e293b; border: 1px solid #334155; }
+        th { background: #334155; color: var(--neon-blue); padding: 15px; text-transform: uppercase; font-size: 12px; }
+        td { padding: 15px; border-bottom: 1px solid #334155; text-align: center; }
+        .btn { background: var(--neon-blue); color: #000; padding: 8px 16px; border-radius: 4px; font-weight: bold; text-decoration: none; font-size: 12px; }
     </style>
 </head>
 <body>
 
-    <div id="preloader">
-        <div class="loader-ring">
-            <span></span>
-            <span></span>
-            <span></span>
-            <div class="percentage" id="progress-text">0%</div>
-        </div>
-        <div class="loading-text">Synchronizing Data</div>
+<div id="preloader">
+    <div class="loader-container">
+        <div class="square-loader"></div>
+        <div class="status-text" id="status-label">Initializing...</div>
+        <div class="percentage-num" id="progress-text">00%</div>
     </div>
+</div>
 
-    <div id="content">
-        <h2>Student List</h2>
-        <table>
+<div id="content">
+    <h2 style="text-align: center; color: var(--neon-blue);">RECORDS_DATABASE_V1.0</h2>
+    
+    <table>
+        <thead>
             <tr>
-                <th>ID</th><th>No</th><th>Names</th><th>Age</th><th>Gender</th><th>Enrollment Date</th><th>Edit</th><th>Delete</th>
+                <th>Student ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Status</th>
+                <th>Action</th>
             </tr>
+        </thead>
+        <tbody>
             <?php
-            // Your PHP Loop here remains the same
             $no = 1;
             while ($row = mysqli_fetch_assoc($result)) {
                 echo "<tr>
-                        <td>{$row['student_id']}</td>
-                        <td>{$no}</td>
-                        <td>{$row['name']}</td>
+                        <td>#{$row['student_id']}</td>
+                        <td style='color: #fff;'>{$row['name']}</td>
                         <td>{$row['age']}</td>
-                        <td>{$row['gender']}</td>
-                        <td>{$row['enrollment_date']}</td>
-                        <td><a href='#'>Edit</a></td>
-                        <td><a href='#'>Delete</a></td>
+                        <td><span style='color: #4ade80;'>ACTIVE</span></td>
+                        <td><a href='edit_student.php?id={$row['student_id']}' class='btn'>VIEW</a></td>
                       </tr>";
                 $no++;
             }
             ?>
-        </table>
-        <div style="text-align:center">
-            <a href="index.php" class="back-home">Back Home</a>
-            <a href="admin_status.php" class="back-home">See Visitors</a>
-        </div>
-    </div>
+        </tbody>
+    </table>
+</div>
 
-    <script>
-        let progress = 0;
-        const progressText = document.getElementById('progress-text');
-        const preloader = document.getElementById('preloader');
-        const content = document.getElementById('content');
+<script>
+    let progress = 0;
+    const progressText = document.getElementById('progress-text');
+    const statusLabel = document.getElementById('status-label');
+    const preloader = document.getElementById('preloader');
+    const content = document.getElementById('content');
 
-        const interval = setInterval(() => {
-            // Speeding up the increments slightly for a snappier feel
-            let increment = Math.floor(Math.random() * 5) + 1; 
-            progress += increment;
+    const statuses = ["Accessing Kernel...", "Bypassing Firewall...", "fetching_data.exe", "Decrypted!", "Ready"];
 
-            if (progress >= 100) {
-                progress = 100;
-                clearInterval(interval);
+    const interval = setInterval(() => {
+        progress += Math.floor(Math.random() * 4) + 1;
+
+        if (progress > 20) statusLabel.innerText = statuses[0];
+        if (progress > 45) statusLabel.innerText = statuses[1];
+        if (progress > 70) statusLabel.innerText = statuses[2];
+        if (progress > 90) statusLabel.innerText = statuses[3];
+
+        if (progress >= 100) {
+            progress = 100;
+            clearInterval(interval);
+            statusLabel.innerText = statuses[4];
+            
+            setTimeout(() => {
+                preloader.style.transition = "0.5s";
+                preloader.style.opacity = "0";
                 
-                // Phase 1: Fade out preloader
-                preloader.style.opacity = '0';
+                content.classList.add('content-visible');
                 
                 setTimeout(() => {
-                    preloader.style.display = 'none';
-                    // Phase 2: Fade in and slide up content
-                    content.style.opacity = '1';
-                    content.style.transform = 'translateY(0)';
-                }, 800);
-            }
-            progressText.textContent = progress + '%';
-        }, 80); 
-    </script>
+                    preloader.style.display = "none";
+                }, 500);
+            }, 600);
+        }
+        
+        // Pad the number with a leading zero if under 10
+        progressText.innerText = progress.toString().padStart(2, '0') + "%";
+    }, 60);
+</script>
+
 </body>
 </html>
